@@ -391,7 +391,7 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* Right visual - Client image */}
+
         <div className="relative mx-auto flex h-[430px] w-full max-w-[600px] items-end justify-center sm:h-[550px] lg:h-[680px] lg:max-w-none">
 
           {/* Decorative circle */}
