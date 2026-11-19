@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import azzaro from "../assets/azzaro.png";
-import sauv from "../assets/sauv.png";
+import { Link } from "react-router-dom";
 import man from '../assets/man.png'
 
 const GOLD = "#e6b565";
@@ -11,7 +10,6 @@ const CREAM = "#faf6f0";
 const serif = { fontFamily: "'Cormorant Garamond', Georgia, serif" };
 const sans = { fontFamily: "'Inter', system-ui, sans-serif" };
 
-/* ---------- Icons (inline, no dependencies) ---------- */
 const Icon = ({ children, className = "w-5 h-5", ...p }) => (
   <svg
     viewBox="0 0 24 24"
@@ -508,13 +506,13 @@ const BestSellers = () => (
           Timeless fragrances, loved by our customers.
         </p>
       </div>
-      <a
-        href="#"
+      <Link
+        to='/products'
         className="hidden items-center gap-2 rounded-full border border-neutral-800 px-5 py-2 text-xs font-medium text-neutral-900 transition hover:bg-neutral-900 hover:text-white sm:flex"
         style={sans}
       >
         View All Products <ArrowRight className="h-3.5 w-3.5" />
-      </a>
+      </Link>
     </div>
     <div className="mt-6 grid grid-cols-2 gap-5 md:grid-cols-3 lg:grid-cols-5">
       {products.map((p, i) => (
