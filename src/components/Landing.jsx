@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import man from '../assets/man.png'
-
+import logo from '../assets/logo.png'
 const GOLD = "#e6b565";
 const GOLD_DEEP = "#c8923a";
 const INK = "#0a0806";
@@ -218,20 +218,9 @@ const careLinks = ["FAQ", "Shipping Policy", "Return Policy", "Privacy Policy", 
 /* ---------- Pieces ---------- */
 const Logo = ({ size = "md" }) => (
   <div className="flex items-center gap-3">
-    <svg viewBox="0 0 40 56" className={size === "lg" ? "h-16" : "h-12"} fill="none" stroke={GOLD} strokeWidth="1.400">
-      <rect x="15" y="2" width="10" height="9" />
-      <rect x="12" y="11" width="16" height="4" />
-      <rect x="4" y="15" width="32" height="38" rx="2" />
-      <path d="M20 26c-4 0-6 3-6 6s3 4 6 4 6 1 6 4-3 5-6 5" />
-    </svg>
-    <div className="leading-none">
-      <div className="text-[28px] font-semibold tracking-wide" style={{ ...serif, color: GOLD }}>
-        PARFUMÉ
-      </div>
-      <div className="mt-1 text-[9px] uppercase tracking-[0.18em] text-white/70" style={sans}>
-        — Luxury Fragrances —
-      </div>
-    </div>
+    <img 
+      src={logo}
+    />
   </div>
 );
 
