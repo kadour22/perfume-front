@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import {
   Search,
   UserRound,
@@ -8,9 +8,11 @@ import {
   ShoppingBag,
   Menu,
   X,
+  ChevronDown,
 } from "lucide-react";
 
-import logo from "../assets/logo.png";
+const GOLD = "#e6b565";
+const GOLD_DEEP = "#c8923a";
 
 const navLinks = [
   { name: "Home", path: "/" },
@@ -19,52 +21,74 @@ const navLinks = [
   { name: "Contact", path: "/contact" },
 ];
 
+const Logo = () => (
+  <Link to="/" className="flex items-center gap-3 shrink-0">
+    <svg
+      viewBox="0 0 40 56"
+      className="h-12 w-auto"
+      fill="none"
+      stroke={GOLD}
+      strokeWidth="1.4"
+    >
+      <rect x="15" y="2" width="10" height="9" />
+      <rect x="12" y="11" width="16" height="4" />
+      <rect x="4" y="15" width="32" height="38" rx="2" />
+      <path d="M20 26c-4 0-6 3-6 6s3 4 6 4 6 1 6 4-3 5-6 5" />
+    </svg>
+
+    <div className="leading-none">
+      <h1
+        className="text-2xl font-semibold tracking-wide"
+        style={{
+          color: GOLD,
+          fontFamily: "'Cormorant Garamond', Georgia, serif",
+        }}
+      >
+        PARFUMÉ
+      </h1>
+
+      <p className="mt-1 text-[9px] uppercase tracking-[0.18em] text-white/60">
+        — Luxury Fragrances —
+      </p>
+    </div>
+  </Link>
+);
+
 const Header = () => {
   const [open, setOpen] = useState(false);
 
-  const navClass = ({ isActive }) =>
-    `flex items-center rounded-full px-4 xl:px-5 py-2 text-sm transition-all duration-300 ${
-      isActive
-        ? "bg-gradient-to-r from-[#f0c27a] to-[#c8923a] font-medium text-black"
-        : "text-white/80 hover:text-[#e6b565]"
-    }`;
-
   return (
     <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-[#0a0806]/95 backdrop-blur-xl">
-
-      {/* Main Header */}
-      <div className="relative mx-auto flex h-[72px] max-w-[1440px] items-center justify-between px-4 sm:h-[84px] sm:px-6 lg:h-[100px] lg:px-10">
+      <div className="mx-auto flex max-w-[1280px] items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-12">
 
         {/* Logo */}
-        <NavLink
-          to="/"
-          aria-label="Go to homepage"
-          className="relative z-10 flex shrink-0 items-center"
-        >
-          <img
-            src={logo}
-            alt="Logo"
-            className="!h-[48px] !w-auto max-w-none object-contain sm:!h-[60px] lg:!h-[82px] xl:!h-[90px]"
-          />
-        </NavLink>
+        <Logo />
 
-        {/* Desktop Navigation */}
+        {/* Desktop navigation */}
         <nav className="hidden items-center gap-1 lg:flex">
           {navLinks.map((link) => (
             <NavLink
               key={link.path}
               to={link.path}
               end={link.path === "/"}
-              className={navClass}
+              className={({ isActive }) =>
+                `flex items-center gap-1 rounded-full px-5 py-2 text-sm transition-all duration-300 ${
+                  isActive
+                    ? "bg-gradient-to-r from-[#f0c27a] to-[#c8923a] font-medium text-black"
+                    : "text-white/80 hover:text-[#e6b565]"
+                }`
+              }
             >
               {link.name}
+              {link.dropdown && (
+                <ChevronDown className="h-3.5 w-3.5" />
+              )}
             </NavLink>
           ))}
         </nav>
 
         {/* Actions */}
-        <div className="flex shrink-0 items-center gap-2 text-white sm:gap-4">
-
+        <div className="flex items-center gap-3 text-white sm:gap-5">
           <button
             aria-label="Search"
             className="hidden transition hover:text-[#e6b565] sm:block"
@@ -74,7 +98,7 @@ const Header = () => {
 
           <button
             aria-label="Account"
-            className="hidden transition hover:text-[#e6b565] md:block"
+            className="hidden transition hover:text-[#e6b565] sm:block"
           >
             <UserRound size={20} strokeWidth={1.5} />
           </button>
@@ -91,25 +115,24 @@ const Header = () => {
             className="relative transition hover:text-[#e6b565]"
           >
             <ShoppingBag size={20} strokeWidth={1.5} />
-
             <span className="absolute -right-2 -top-2 flex h-4 w-4 items-center justify-center rounded-full bg-[#e6b565] text-[10px] font-bold text-black">
               2
             </span>
           </button>
 
-          {/* Mobile Menu */}
+          {/* Mobile menu */}
           <button
             aria-label="Toggle navigation"
             aria-expanded={open}
             onClick={() => setOpen((prev) => !prev)}
-            className="ml-1 flex items-center justify-center lg:hidden"
+            className="ml-1 lg:hidden"
           >
             {open ? <X size={25} /> : <Menu size={25} />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Navigation */}
+      {/* Mobile navigation */}
       {open && (
         <nav className="border-t border-white/10 bg-[#0a0806] px-4 py-4 lg:hidden">
           <div className="mx-auto flex max-w-[1280px] flex-col gap-1">
@@ -120,7 +143,7 @@ const Header = () => {
                 end={link.path === "/"}
                 onClick={() => setOpen(false)}
                 className={({ isActive }) =>
-                  `rounded-xl px-4 py-3 text-sm transition ${
+                  `flex items-center justify-between rounded-xl px-4 py-3 text-sm transition ${
                     isActive
                       ? "bg-white/5 text-[#e6b565]"
                       : "text-white/80 hover:bg-white/5 hover:text-[#e6b565]"
@@ -128,6 +151,9 @@ const Header = () => {
                 }
               >
                 {link.name}
+                {link.dropdown && (
+                  <ChevronDown size={16} />
+                )}
               </NavLink>
             ))}
           </div>
