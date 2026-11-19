@@ -476,7 +476,7 @@ const ProductCard = ({ p, index }) => (
           className="mt-2 bg-clip-text text-2xl font-semibold text-transparent"
           style={{ ...serif, backgroundImage: "linear-gradient(180deg,#f6d595,#c8923a)" }}
         >
-          ${p.price.toFixed(2)}
+          {p.price.toFixed(2)} DT
         </p>
         <button className="mt-3.5 flex w-full items-center justify-center gap-2 rounded-full border border-[#e6b565]/70 whitespace-nowrap py-2.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-[#e6b565] sm:text-[11px] sm:tracking-[0.18em] transition duration-300 hover:border-transparent hover:bg-gradient-to-r hover:from-[#f0c27a] hover:to-[#c8923a] hover:text-black">
           <CartIcon className="h-3.5 w-3.5" /> Add to Cart
